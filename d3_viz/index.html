@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UMAP - Dermatoscopic images</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="dot"></div>
+      <div>
+        <div class="title">UMAP - Real vs synthetic dermatoscopic images</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="control">
+        <div class="controlLabel">Type</div>
+        <select id="typeFilter" class="select">
+          <option value="all">all</option>
+          <option value="real">real</option>
+          <option value="synthetic">synthetic</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <div class="controlLabel">Label</div>
+        <select id="labelFilter" class="select">
+          <option value="all">all</option>
+          <option value="0">0</option>
+          <option value="1">1</option>
+        </select>
+      </div>
+
+      <div class="stats" id="stats">points: —</div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="panel plotPanel">
+      <div class="panelHead">
+        <div class="panelTitle">UMAP scatter</div>
+
+        <!-- spacer: gura legendu skroz desno -->
+        <div style="flex:1 1 auto;"></div>
+
+        <!-- Legend that matches visuals (RIGHT) -->
+        <div class="legend">
+          <div class="legItem">
+            <span class="swatch swatchFill label0"></span><span>label 0 (benign)</span>
+          </div>
+          <div class="legItem">
+            <span class="swatch swatchFill label1"></span><span>label 1 (malignant)</span>
+          </div>
+          <div class="legItem">
+            <span class="swatch swatchReal"></span><span>real</span>
+          </div>
+          <div class="legItem">
+            <span class="swatch swatchSyn"></span><span>synthetic</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="plot" class="plot"></div>
+      <div id="tip" class="tip"></div>
+    </section>
+
+    <aside class="side">
+      <div class="card">
+        <div class="muted">
+          Kliknite točku u scatteru za detalje. Synthetic prikazuje nearest real uzorke i NN udaljenost.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardTitle">Nearest-real distance</div>
+        <div class="muted">Histogram za synthetic nakon filtera</div>
+        <div class="pillrow">
+          <span class="pill" id="nnSummary">n=—</span>
+        </div>
+        <div id="nnChart" class="nnChart"></div>
+      </div>
+
+      <div id="detail"></div>
+    </aside>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modalBox">
+      <button id="modalClose" class="modalClose" aria-label="Close">✕</button>
+      <img id="modalImg" class="modalImg" alt="Preview" />
+      <div id="modalCap" class="modalCap"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

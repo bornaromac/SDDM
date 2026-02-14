@@ -1,0 +1,58 @@
+seed: 42
+
+data:
+  root: "data"
+  archive_zip: "data/archive.zip"
+  extracted_dir: "data/extracted"
+  image_dir_glob:
+    - "data/extracted/**/HAM10000_images_part_1"
+    - "data/extracted/**/HAM10000_images_part_2"
+    - "data/extracted/**/HAM10000_images"
+  metadata_glob:
+    - "data/extracted/**/HAM10000_metadata.csv"
+  image_size: 64
+  num_workers: 2
+  val_ratio: 0.1
+
+  malignant_dx: ["mel", "bcc", "akiec"]
+  benign_dx: ["nv", "bkl", "df", "vasc"]
+  num_classes: 2
+
+train:
+  batch_size: 64
+  grad_accum_steps: 1
+  lr: 2e-4
+  weight_decay: 1e-4
+  epochs: 30
+  max_train_steps: 20000          # znatno kraće od 50k
+  grad_clip_norm: 1.0
+  mixed_precision: "fp16"
+  save_every_steps: 2000         # 2 checkpointa + final
+  log_every_steps: 400            # rjeđi logging
+
+eval:
+  val_every_steps: 5000           # 4 validacije (5k,10k,15k,20k)
+  max_val_batches: 10             # brza validacija
+  sample_every_steps: 2000       # 2 sample pointa (10k i 20k)
+  sample_steps: 50                # ostavi 50 (monitoring)
+  sample_n_per_class: 8           # 16 slika total (2 klase)
+
+diffusion:
+  num_train_timesteps: 1000
+  beta_schedule: "squaredcos_cap_v2"
+  prediction_type: "epsilon"
+
+model:
+  base_channels: 64
+  channel_mults: [1, 2, 4]
+  layers_per_block: 2
+  add_attention: true
+  dropout: 0.0
+
+ema:
+  use_ema: true
+  decay: 0.9999
+
+output:
+  out_dir: "runs/ddpm_ham_64_fast"
+  save_images_dir: "runs/ddpm_ham_64_fast/samples"

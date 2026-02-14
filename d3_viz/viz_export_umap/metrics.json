@@ -1,0 +1,28 @@
+{
+  "counts": {
+    "real": 200,
+    "synthetic": 200
+  },
+  "resize": {
+    "target_size": 64,
+    "thumb_size": 64
+  },
+  "umap": {
+    "n_neighbors": 25,
+    "min_dist": 0.15,
+    "metric": "euclidean",
+    "seed": 42
+  },
+  "sharpness": {
+    "real_mean": 0.0018796228931751103,
+    "real_std": 0.0018584268309177606,
+    "synthetic_mean": 0.013799619980272838,
+    "synthetic_std": 0.010689264518405411
+  },
+  "nearest_real_distance": {
+    "mean": 22.532623052597046,
+    "std": 5.569399798227662,
+    "min": 9.845211029052734,
+    "max": 34.56609344482422
+  }
+}

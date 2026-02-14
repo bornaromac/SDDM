@@ -1,0 +1,13 @@
+﻿.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+data/
+ckpts/
+runs/
+debug_roundtrip/
+*.zip
+viz_export/**/*.jpg
+viz_export/**/*.jpeg
+viz_export/**/*.png
+viz_export/**/*.webp
